@@ -15,6 +15,8 @@ import le from "../images/le.jpeg";
 import nk from "../images/nk.webp";
 import  adidas from "../images/adidas.webp";
 import ch1 from "../images/ch1.jpeg";
+import p1 from "../images/p1.jpg";
+import p2 from "../images/p2.jpg";
 import Navbar from "./Navbar";
 export default function Home() {
   return (
@@ -109,7 +111,7 @@ export default function Home() {
                 </div>
                 <div className="carousel-item">
                   <img
-                    src={n7}
+                    src={p1}
                     height={600}
                     className="d-block w-100"
                     alt="..."
@@ -117,7 +119,7 @@ export default function Home() {
                 </div>
                 <div className="carousel-item">
                   <img
-                    src={n9}
+                    src={p2}
                     height={600}
                     className="d-block w-100"
                     alt="..."

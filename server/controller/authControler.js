@@ -12,6 +12,7 @@ const { sign } = jwt;
 
 exports.login = async function (req, res) {
     try {
+      console.log("reched");
       console.log("Request Body:", req.body);
   
       let email=req.body.email;
