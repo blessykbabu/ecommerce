@@ -8,11 +8,11 @@ import {Link} from 'react-router-dom';
 import { object, string, number } from "yup";
 import axios from "axios";
 // import Loading from "./Loading";
-// import ErrorComponent from "../components/ErrorComponent";
-// import SuccessComponent from "../components/SuccessComponent";
 import google from "../images/google.png";
 import facebook from "../images/facebook.png";
 import urls from "../../utils/url";
+import ErrorComponent from "./ErrorComponent";
+import Success from "./Success";
 export default function Registration() {
   const HOSTED_SERVER_URL=urls()
   const [serverSuccess, setServerSuccess] = useState("");
@@ -73,8 +73,8 @@ export default function Registration() {
           <Loading />
         ) : (
           <div>
-            <h3 style={{ textAlign: "center", padding: 20, color: "gray" }}>
-              Create Your Account
+            <h3 style={{ textAlign: "center", padding: 20, color: "gray",fontWeight:"bold" }}>
+            WELCOME TO EZYMART
             </h3>
             
             <div className="regfrm">
@@ -87,7 +87,8 @@ export default function Registration() {
                 alt="..."
               />
               </div> */}
-              <div className="col-sm-12 col-md-12 col-lg-3 rr">
+              {/* <div className="col-sm-12 col-md-12 col-lg-3 rr"> */}
+              <div className="col-sm-12 col-md- col-lg-6 rr">
                 <Formik
                   initialValues={initialValues}
                   onSubmit={handleSubmit}
@@ -127,11 +128,12 @@ export default function Registration() {
                     isSubmitting,
                   }) => (
                     <Form>
+                     
                       <div
-                        className="shadow-lg bg-body rounded text-center"
-                        style={{ backgroundColor: "white", opacity: 0.75 }}
+                        className="shadow-lg bg-body rounded text-center frm"
+                        style={{ backgroundColor: "white",opacity:0.8}}
                       >
-
+                        {/* <h4 className="welcome">WELCOME TO EZYMART</h4> */}
                         <div
                           className="mb-3 "
                           style={{ padding: 10, color: "red" }}
@@ -140,14 +142,15 @@ export default function Registration() {
                           <label
                             htmlFor="name"
                             className="form-label"
-                            style={{ color: "black" }}
+                            style={{ color: "black",fontWeight:"bold" }}
                           >
-                            Name
+                            {/* Name */}
                             <Field
                             type="text"
                             id="name"
                             name="name"
                             className="form-control"
+                            placeholder="Name"
                           />
                           <ErrorMessage
                             name="name"
@@ -169,14 +172,15 @@ export default function Registration() {
                           <label
                             htmlFor="email"
                             className="form-label"
-                            style={{ color: "black" }}
+                            style={{ color: "black",fontWeight:"bold" }}
                           >
-                            Email
+                            {/* Email */}
                             <Field
                             type="email"
                             id="email"
                             name="email"
                             className="form-control"
+                            placeholder="Email"
                           />
                           <ErrorMessage
                             name="email"
@@ -208,12 +212,13 @@ export default function Registration() {
                             className="form-label"
                             style={{ color: "black" }}
                           >
-                            Phone
+                            {/* Phone */}
                             <Field
                             type="text"
                             id="phone"
                             name="phone"
                             className="form-control"
+                            placeholder="Phone"
                           />
                           <ErrorMessage
                             name="phone"
@@ -237,12 +242,13 @@ export default function Registration() {
                             className="form-label"
                             style={{ color: "black" }}
                           >
-                            District
+                            {/* District */}
                             <Field
                             type="text"
                             id="district"
                             name="district"
                             className="form-control"
+                            placeholder="District"
                           />
                           <ErrorMessage
                             name="district"
@@ -266,12 +272,13 @@ export default function Registration() {
                             className="form-label"
                             style={{ color: "black" }}
                           >
-                            I am a Seller/Buyer
+                            {/* I am a Seller/Buyer */}
                             <Field
                             type="text"
                             id="category"
                             name="category"
                             className="form-control"
+                            placeholder=" I am a Seller/Buyer"
                           />
                           <ErrorMessage
                             name="category"
@@ -296,12 +303,13 @@ export default function Registration() {
                             className="form-label"
                             style={{ color: "black" }}
                           >
-                           Address
+                           {/* Address */}
                             <Field
                             type="text"
                             id="address"
                             name="address"
                             className="form-control"
+                            placeholder=" Address"
                           />
                           <ErrorMessage
                             name="address"
@@ -329,12 +337,13 @@ export default function Registration() {
                             className="form-label"
                             style={{ color: "black" }}
                           >
-                            Password
+                            {/* Password */}
                             <Field
                             type="password"
                             id="password"
                             name="password"
                             className="form-control"
+                            placeholder=" Password"
                           />
                           <ErrorMessage
                             name="password"
@@ -381,7 +390,7 @@ export default function Registration() {
             
               
             {serverSuccess && (
-        <SuccessComponent
+        <Success
           message={validationMsg}
         
           onClose={() => setServerSuccess(false)}

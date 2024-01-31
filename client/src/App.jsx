@@ -5,6 +5,7 @@ import Footer from "./Components/footer";
 import Login from "./Components/Login";
 import Shop from "./Components/Shop";
 import Registration from "./Components/Registration";
+import Admin from "./Components/Admin";
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/signup" element={<Registration/>}/>
 
         <Route path="/products" element={<Shop/>}/>
+        <Route path="/admin/dashboard" element={<Admin/>}/>
 
 
         

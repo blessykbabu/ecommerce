@@ -63,6 +63,7 @@ export default function Footer() {
 
 
       <footer className="footer">
+        
         <div className="items">
           <div className="first">
           <h5 className="mt-3 mb-3">LINKS</h5>
@@ -90,7 +91,7 @@ export default function Footer() {
   
     <input
       type="email"
-      className="form-control m-3"
+      className="form-control m-3 inp"
       id="exampleInputEmail1"
       placeholder="Please  Enter Your Email"
       aria-describedby="emailHelp"

@@ -7,9 +7,8 @@ import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate, Link } from "react-router-dom";
 import urls from "../../utils/url";
-// import SucessComponent from "./SuccessComponent";
-// import ErrorComponent from "./ErrorComponent";
-// import SuccessComponent from "./SuccessComponent";
+import Success from "./Success";
+
 
 export default function Login() {
   const HOSTED_SERVER_URL=urls();
@@ -29,6 +28,7 @@ export default function Login() {
     try {
       console.log("values::", values);
       const response = await axios.post(`${HOSTED_SERVER_URL}/login`, values);
+      console.log("value aftre:",values);
       console.log("Login:", response.data);
 
       if (response.data.error) {
@@ -69,7 +69,9 @@ export default function Login() {
   return (
     <>
       <div className="lgfrm">
-        <div className="mx-auto col-sm-12 col-md-12 col-lg-5 justify-content-center lg-container">
+        {/* <div className="mx-auto col-sm-12 col-md-12 col-lg-5 justify-content-center lg-container"> */}
+        <div className="mx-auto col-sm-12 col-md-12 col-lg-7 justify-content-center lg-container">
+
           <Formik className="log"
             initialValues={initialValues}
             onSubmit={handleSubmit}
@@ -92,7 +94,7 @@ export default function Login() {
                   className="m-3"
                   style={{ textAlign: "center", color: "gray",fontWeight:"bolder" }}
                 >
-                  Sign In
+                  WELCOME BACK
                 </h4>
                 <div
                   className="shadow-lg bg-body rounded log-bg login"
@@ -104,13 +106,13 @@ export default function Login() {
                       className="form-label"
                       style={{ color: "gray" }}
                     >
-                      Email
+                      {/* Email */}
                       <Field
                         type="email"
                         id="email"
                         name="email"
-                        // placeholder="Email"
-                        className="form-control"
+                        placeholder="Email"
+                        className="form-control mt-3"
                       />
                       <ErrorMessage
                         name="email"
@@ -135,12 +137,12 @@ export default function Login() {
                       className="form-label"
                       style={{ color: "gray" }}
                     >
-                      Password
+                      {/* Password */}
                       <Field
                         type={showPassword ? "text" : "password"}
                         id="password"
                         name="password"
-                        // placeholder="Name"
+                        placeholder="Name"
                         className="form-control"
                       />
                       <span onClick={togglePasswordVisibility}>
@@ -167,7 +169,7 @@ export default function Login() {
                         Forgot Password?
                       </Link>
                     </p>
-                    <p>
+                    <p >
                      
                         Don't have an account?
                         <Link
@@ -187,19 +189,19 @@ export default function Login() {
           </Formik>
         </div>
       </div>
-      {/* {serverSuccess && (
-        <SuccessComponent
+      {serverSuccess && (
+        <Success
           message={validationMsg}
         
           onClose={() => setServerSuccess(false)}
         />
       )}
     {serverError && (
-        <ErrorComponent
+        <Error
           message={validationMsg}
           onClose={() => setServeError("")}
         />
-      )} */}
+      )}
     </>
   );
 }

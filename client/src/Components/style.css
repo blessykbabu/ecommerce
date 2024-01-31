@@ -194,7 +194,10 @@ main {
 .footer{
   background-color: black;
   color: white;
-  margin-top: 10px;
+  margin-top: 20px;
+ 
+  bottom: 0px;
+  
 }
 .items{
   /* margin-top: 20px; */
@@ -219,7 +222,36 @@ main {
 
 
 .login{
-  background-color:rgb(2, 2, 2) !important;
+  /* background-color:rgb(2, 2, 2) !important; */
+  background-image: url("../images/b11.jpg"),url("../images/bg.jpg");
+  background-position: left top,right top;
+  background-repeat: no-repeat;
+  /* background-size: cover; */
+}
+
+
+/* registration */
+
+.regfrm{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* .welcome{
+  background-color:gray;
+  font-weight: bold;
+  padding: 20px;
+  color:white;
+  
+} */
+.frm{
+  /* background-image: url("../images/b1.jpg"), url("../images/b12.jpg"),url("../images/b11.jpg"),url("../images/b10.jpg"),url("../images/b5.jpg") ,url("../images/b9.jpg"),url("../images/b9.jpg");
+  background-position: right bottom, left top 3%,right top,left bottom,left 52%  ;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat; */
+  background-image: url("../images/big.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 /* shop */
@@ -458,4 +490,10 @@ main {
   }
 }
 
- 
+ @media screen and (max-width:430px){
+.items{
+  flex-direction: column;
+  margin: 0px;
+}
+
+ }
