@@ -1,38 +1,121 @@
-export default function Shop(){
-    return(
-        <>
-        <>
-  <meta charSet="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <div className="container">
-    <div className="card">
-      <div className="imgBx">
-        <img
-          src="http://pngimg.com/uploads/running_shoes/running_shoes_PNG5782.png"
-          alt="nike-air-shoe"
-        />
-      </div>
-      <div className="contentBx">
-        <h2>Nike Shoes</h2>
-        {/* <div className="size">
-          <h3>Size :</h3>
-          <span>7</span>
-          <span>8</span>
-          <span>9</span>
-          <span>10</span>
-        </div> */}
-        <div className="color">
-          <h3>$200</h3>
-          {/* <span />
-          <span />
-          <span /> */}
-        </div>
-        <a href="#">View</a>
-      </div>
-    </div>
-  </div>
-</>
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import Loading from "./Loader";
+import urls from "../../utils/url";
+export default function Shop() {
+  const HOSTED_SERVER_URL = urls();
+  const navigate = useNavigate();
+  const [lists, setLists] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const [totalPages, setTotalPages] = useState(0);
+  const [loading, setLoading] = useState(true);
 
-        </>
-    )
+  useEffect(() => {
+    try {
+      const token = localStorage.getItem("token");
+      // console.log("token in shop",token)
+      axios
+        .get(
+          `${HOSTED_SERVER_URL}/fetch/products?page=${currentPage}&pageSize=${pageSize}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((response) => {
+          setLists(response.data.data.datas);
+          console.log("total_pages", response.data.data.total_pages);
+          setTotalPages(response.data.data.total_pages);
+        })
+        .catch((error) => {
+          console.log("get error:", error.message ? error.message : error);
+        });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+      }, 300);
+    }
+  }, [currentPage, pageSize, loading]);
+
+  const productsInRows = [];
+  for (let i = 0; i < lists.length; i += 4) {
+    const rowProducts = lists.slice(i, i + 4);
+    productsInRows.push(rowProducts);
+  }
+  const handleOrderClick = (list) => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      navigate(`/order/product/${list._id}`);
+    } else {
+      // Redirect to the login page if there's no token
+      navigate("/login");
+    }
+  };
+
+  return (
+    <>
+      <div>
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className="container">
+            {productsInRows.map((rowProducts, rowIndex) => (
+              <div className="row" key={rowIndex}>
+                {rowProducts.map((list, index) => (
+                  <div className="col-md-3" key={index}>
+                    <div className="product card mb-3">
+                      <span className="product__price">${list.price}</span>
+                      <img
+                        className="product__image"
+                        src={`${HOSTED_SERVER_URL}/${list.pimage}`}
+                        height={300}
+                        width={300}
+                      />
+                      <h1 className="product__title">{list.name}</h1>
+                      <hr />
+
+                      <a href="#" className="product__btn btn view" onClick={() => handleOrderClick(list)}>
+                        View
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))}
+            <nav
+              className="d-flex justify-content-center"
+              aria-label="Page navigation"
+            >
+              <ul className="pagination">
+                {Array.from({ length: totalPages }, (_, index) => (
+                  <li
+                    key={index + 1}
+                    className={`page-item ${
+                      currentPage === index + 1 ? "active" : ""
+                    }`}
+                  >
+                    <Link
+                      // to={`?page=${index + 1}`}
+                      className="page-link"
+                      onClick={() => (
+                        setCurrentPage(index + 1), setLoading(true)
+                      )}
+                    >
+                      {index + 1}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+        )}
+      </div>
+    </>
+  );
 }

@@ -28,7 +28,6 @@ export default function Login() {
     try {
       console.log("values::", values);
       const response = await axios.post(`${HOSTED_SERVER_URL}/login`, values);
-      console.log("value aftre:",values);
       console.log("Login:", response.data);
 
       if (response.data.error) {
@@ -69,8 +68,8 @@ export default function Login() {
   return (
     <>
       <div className="lgfrm">
-        {/* <div className="mx-auto col-sm-12 col-md-12 col-lg-5 justify-content-center lg-container"> */}
-        <div className="mx-auto col-sm-12 col-md-12 col-lg-7 justify-content-center lg-container">
+        <div className="mx-auto col-sm-12 col-md-12 col-lg-5 justify-content-center lg-container">
+        {/* <div className="mx-auto col-sm-12 col-md-12 col-lg-7 justify-content-center lg-container"> */}
 
           <Formik className="log"
             initialValues={initialValues}
@@ -142,7 +141,7 @@ export default function Login() {
                         type={showPassword ? "text" : "password"}
                         id="password"
                         name="password"
-                        placeholder="Name"
+                        placeholder="Password"
                         className="form-control"
                       />
                       <span onClick={togglePasswordVisibility}>

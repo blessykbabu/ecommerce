@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 // import Profile from "./profile";
 // import ResetPassword from "./ResetPassword";
 import urls from "../../utils/url";
+import Profile from "./Profile";
 export default function Admin() {
   const HOSTED_SERVER_URL=urls();
   const [selecteIcon, setSelecteIcon] = useState(null);
