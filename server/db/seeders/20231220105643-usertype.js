@@ -41,7 +41,7 @@ module.exports = {
       if ('usertypes' in models) {
         const usertypes = models.usertypes;
         const deleted = await usertypes.deleteMany({
-          _id:{$in:["6582ce130a0dd1bc7fe48dad","6582ce130a0dd1bc7fe48dae"]}
+          _id:{$in:["6582ce130a0dd1bc7fe48dad","6582ce130a0dd1bc7fe48dae","6598dd77f3261b14b25ff389"]}
 
           
         });
