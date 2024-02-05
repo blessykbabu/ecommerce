@@ -32,6 +32,8 @@ router.delete('/userproducts/delete/:id',setAccessControl('1,3'),userControler.d
 router.delete('/delete/myproduct/:id',setAccessControl('3'),userControler.Seller_deleteProduct);
 
 router.get('/address',setAccessControl('*'),auth,userControler.userProfile)
+router.get('/user/:id',setAccessControl('*'),userControler.user)
+router.put('/change/role/:id',setAccessControl('*'),userControler.role)
 
 
 module.exports=router

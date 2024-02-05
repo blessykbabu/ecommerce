@@ -139,6 +139,7 @@ export default function Home() {
                       alt="..."
                     />
                   </div>
+                
                 </div>
                 <button
                   className="carousel-control-prev"

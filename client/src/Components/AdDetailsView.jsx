@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 // import "./product.css";
 import urls from "../../Urls/url";
+import { ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function AdDeatailsView() {
   const HOSTED_SERVER_URL=urls();
   const { id } = useParams("");

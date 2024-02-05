@@ -30,7 +30,7 @@ exports.login = async function (req, res) {
       
         // let user = await users.findOne({ email:email }).populate("usertype");
         
-        // console.log("user",user)
+        console.log("user",user)
         
   // let user = await users.findOne({ email }).populate('usertype');
       //  console.log("user", user);

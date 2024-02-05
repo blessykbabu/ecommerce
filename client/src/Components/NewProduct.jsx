@@ -387,7 +387,7 @@ const HOSTED_SERVER_URL=urls();
                           </label>
                         </div>
                        
-                        <button className="btn btn-dark m-3" type="submit">
+                        <button className="btn btn-primary m-3" type="submit">
                           Add
                         </button>
                       </div>

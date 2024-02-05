@@ -8,7 +8,8 @@ import { object, string } from "yup";
 import axios from "axios";
 import { useNavigate} from "react-router-dom";
 import urls from "../../Urls/url";
-
+import { ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function Forgot_Password() {
   const HOSTED_SERVER_URL=urls();
   const navigate = useNavigate();
@@ -46,6 +47,7 @@ console.log("response",response)
       } else if (response.data.success) {
         setServerSuccess(true);
         setvalidationMsg(response.data.message);
+        toast.success("your password is changed");
         const token = response.data.data;
        console.log("token in forgot password:", token);
 
@@ -57,6 +59,7 @@ console.log("response",response)
       console.error("Not Submitted", error);
       setServeError(true);
       console.log("error", error);
+      toast.error(error);
     }
   };
 
@@ -67,6 +70,7 @@ console.log("response",response)
   return (
     <>
       <div className="lgfrm">
+      <ToastContainer position="top-right"  hideProgressBar={false} />
         <div
           className="container mx-auto col-sm-12 col-md-12 col-lg-5 justify-content-center"
         >

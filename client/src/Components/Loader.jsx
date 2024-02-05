@@ -7,7 +7,7 @@ display:block;
 margin:0 auto;`
 ;
 
-function Loading() {
+function Loader() {
   let [loading, setLoading] = useState(true);
   let [color, setColor] = useState("blue");
 
@@ -31,4 +31,4 @@ function Loading() {
   );
 }
 
-export default Loading;
+export default Loader;

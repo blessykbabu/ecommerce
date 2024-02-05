@@ -5,18 +5,21 @@ import trol from "../images/trol.png";
 import urls from "../../utils/url";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import icon1 from "../images/icon1.png";
+
 export default function Navbar() {
   const HOSTED_SERVER_URL = urls();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setuserData] = useState({});
+  const [isSeller, setSeller] = useState(false);
+  const [isUser, setUser] = useState(false);
 
   useEffect(() => {
-
     const token = localStorage.getItem("token");
 
-    if(token) {
+    if (token) {
       setIsLoggedIn(true);
-    }else {
+    } else {
       setIsLoggedIn(false);
     }
 
@@ -35,7 +38,16 @@ export default function Navbar() {
           }
         );
         setuserData(response.data.data);
-        console.log("data", response.data.data);
+        var type = response.data.data.category;
+        console.log(type);
+        if (type == "seller") {
+          setSeller(true);
+        } else if (type == "Buyer") {
+          setUser(true);
+        } else {
+          setSeller(false);
+          setUser(false);
+        }
       } catch (error) {
         if (error.response && error.response.status === 404) {
           //  not found error
@@ -54,8 +66,9 @@ export default function Navbar() {
     <>
       <nav className="navbar navbar-expand-lg s-nav transparent">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
-            <img src={trol} height={20} width={20} alt="Logo" />
+          <a className="navbar-brand e" href="#">
+            {/* <img src={trol} height={20} width={20} alt="Logo" /> */}
+            <h1 data-text="EZY" className="hd"></h1>{" "}
           </a>
           <button
             className="navbar-toggler"
@@ -75,11 +88,11 @@ export default function Navbar() {
                   Home
                 </Link>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <a className="nav-link" href="#">
                   Features
                 </a>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <Link className="nav-link" to="/products">
                   Shop
@@ -114,44 +127,202 @@ export default function Navbar() {
                   Logout
                 </Link>
               </li> */}
-              </ul>
-              <ul className="navbar-nav">
+
+              {isSeller && (
+                <>
+                  <li className="nav-item dropdown">
+                    <a
+                      className="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      My Shop
+                    </a>
+                    <ul className="dropdown-menu">
+                      <li>
+                        <Link className="dropdown-item" to="/add/products">
+                          New Product
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className="dropdown-item"
+                          to={`/view/products/${userData._id}`}
+                        >
+                          My products
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+                  <li className="nav-item dropdown">
+                    <a
+                      className="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <img src={icon1} height={20} />
+                    </a>
+                    <ul className="dropdown-menu">
+                      <li>
+                        <Link
+                          className="dropdown-item"
+                          to={`/myorder/${userData._id}`}
+                        >
+                          My orders
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className="dropdown-item"
+                          to={`/mycart/${userData._id}`}
+                        >
+                          My cart
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+                  <li className="nav-item dropdown">
+                    <a
+                      className="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      My Account
+                    </a>
+                    <ul className="dropdown-menu">
+                      <li>
+                        <Link className="dropdown-item" to="/profile">
+                          My Profile
+                        </Link>
+                      </li>
+                      <li>
+                        <Link className="dropdown-item" to="/address">
+                          Address
+                        </Link>
+                      </li>
+                      <li>
+                        <Link className="dropdown-item" to="/resetpassword">
+                          Account Security
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+                </>
+              )}
+              {isUser && (
+                <>
+                  <li className="nav-item dropdown">
+                    <a
+                      className="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <img src={icon1} height={20} />
+                    </a>
+                    <ul className="dropdown-menu">
+                      <li>
+                        <Link
+                          className="dropdown-item"
+                          to={`/myorder/${userData._id}`}
+                        >
+                          My orders
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className="dropdown-item"
+                          to={`/mycart/${userData._id}`}
+                        >
+                          My cart
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+                  <li className="nav-item dropdown">
+                    <a
+                      className="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      My Account
+                    </a>
+                    <ul className="dropdown-menu">
+                      <li>
+                        <Link className="dropdown-item" to="/profile">
+                          My Profile
+                        </Link>
+                      </li>
+                      <li>
+                        <Link className="dropdown-item" to="/address">
+                          Address
+                        </Link>
+                      </li>
+                      <li>
+                        <Link className="dropdown-item" to="/resetpassword">
+                          Account Security
+                        </Link>
+                      </li>
+                      <li>
+                        <Link className="dropdown-item" to={`/change/role/${userData._id}`}>
+                          Become a Seller
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+                </>
+              )}
+            </ul>
+            <ul className="navbar-nav right">
+              <li className="nav-item">
+                <a className="nav-link" href="#">
+                  <img src={trol} height={20} width={20} alt="Logo" />
+                </a>
+              </li>
               {isLoggedIn ? (
-                <li className="nav-item logout" style={{position:"relative",right:"0px"}}>
-                  
+                <li
+                  className="nav-item logout"
+                  style={{ position: "relative", right: "0px" }}
+                >
                   <Link className="nav-link" to="/logout">
-                   <button className="btn log">
-                    Logout
-                    </button>
+                    <button className="btn log">Logout</button>
                   </Link>
                 </li>
               ) : (
                 <li className="nav-item dropdown">
-                <div className="btn-group">
-                  <button
-                    type="button"
-                    className="btn join dropdown-toggle"
-                    data-bs-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    Join
-                  </button>
-                  <ul className="dropdown-menu">
-                    <li>
-                      <Link className="dropdown-item" to="/login">
-                        LogIn
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to="/signup">
-                        Sign Up
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              
+                  <div className="btn-group">
+                    <button
+                      type="button"
+                      className="btn join dropdown-toggle"
+                      data-bs-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      Join
+                    </button>
+                    <ul className="dropdown-menu">
+                      <li>
+                        <Link className="dropdown-item" to="/login">
+                          LogIn
+                        </Link>
+                      </li>
+                      <li>
+                        <Link className="dropdown-item" to="/signup">
+                          Sign Up
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
               )}
             </ul>
           </div>

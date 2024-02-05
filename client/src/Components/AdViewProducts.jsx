@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import Loading from "./Loading";
-import "./admin.css";
-import SuccessComponent from "./SuccessComponent";
-import urls from "../../Urls/url";
+import urls from "../../utils/url";
+import Success from "./Success";
+import ErrorComponent from "./ErrorComponent";
+import Loader from "./Loader";
 
 export default function AdViewProducts() {
   const HOSTED_SERVER_URL=urls();
@@ -75,13 +75,18 @@ export default function AdViewProducts() {
       if (response.data.success) {
         setDeletedata(true); // Set deletedata to true upon successful deletion
         setValidationMessage(response.data.message);
+       
       } else {
         setError(true); // Set error in case of deletion failure
+        
       }
+      
+
       setUpdate(false);
     } catch (error) {
       setError(true); // Set error in case of request failure
       console.log("Error in delete", error);
+      
     } finally {
       setTimeout(() => {
         setLoading(false);
@@ -94,17 +99,17 @@ export default function AdViewProducts() {
     <>
       <div>
         {loading ? (
-          <Loading />
+          <Loader />
         ) : (
           <div className="container">
             {productsInRows.map((rowProducts, rowIndex) => (
               <div className="row" key={rowIndex}>
                 {rowProducts.map((list, index) => (
-                  <div className="col-12 d-flex m-3" key={index}>
+                  <div className="ad-view col-12 d-flex m-3" key={index}>
                     <div className="product">
                       <img src={`${HOSTED_SERVER_URL}/${list.pimage}`} height={300} width={300} />
                     </div>
-                    <div className="prodata">
+                    <div className="prodata ms-2">
                       <table className=" mx-auto">
                         <tbody>
                           <tr>
@@ -123,11 +128,11 @@ export default function AdViewProducts() {
                             <td>${list.price}</td>
                           </tr>
                           <tr>
-                            <td style={{ verticalAlign: "top" }}>
+                            <td style={{ verticalAlign: "top"}}>
                               Description
                             </td>
                             <td style={{ verticalAlign: "top" }}>:</td>
-                            <td style={{ verticalAlign: "top" }}>
+                            <td  className="des" style={{ verticalAlign: "top" ,textAlign:"justify" }}>
                               {list.description}
                             </td>
                           </tr>
@@ -174,7 +179,7 @@ export default function AdViewProducts() {
         )}
       </div>
       {deletedata && (
-        <SuccessComponent message={validationMessage} onClose={handledelete} />
+        <Success message={validationMessage} onClose={handledelete} />
       )}  
     </>
   );

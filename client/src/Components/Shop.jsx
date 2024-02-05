@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import Loading from "./Loader";
 import urls from "../../utils/url";
+import Loader from "./Loader";
+import { ToastContainer } from 'react-toastify';
 export default function Shop() {
   const HOSTED_SERVER_URL = urls();
   const navigate = useNavigate();
@@ -48,27 +49,26 @@ export default function Shop() {
     productsInRows.push(rowProducts);
   }
   const handleOrderClick = (list) => {
-    const token = localStorage.getItem("token");
+    // const token = localStorage.getItem("token");
 
-    if (token) {
+    // if (token) {
       navigate(`/order/product/${list._id}`);
-    } else {
-      // Redirect to the login page if there's no token
-      navigate("/login");
-    }
+    // } else {
+    //   navigate("/login");
+    // }
   };
 
   return (
     <>
       <div>
         {loading ? (
-          <Loading />
+          <Loader />
         ) : (
           <div className="container">
             {productsInRows.map((rowProducts, rowIndex) => (
               <div className="row" key={rowIndex}>
                 {rowProducts.map((list, index) => (
-                  <div className="col-md-3" key={index}>
+                  <div className="col-md-3 mt-5" key={index}>
                     <div className="product card mb-3">
                       <span className="product__price">${list.price}</span>
                       <img
@@ -77,12 +77,12 @@ export default function Shop() {
                         height={300}
                         width={300}
                       />
-                      <h1 className="product__title">{list.name}</h1>
+                      <h4 className="product__title">{list.name}</h4>
                       <hr />
 
-                      <a href="#" className="product__btn btn view" onClick={() => handleOrderClick(list)}>
+                      <button className="product__btn btn view" onClick={() => handleOrderClick(list)}>
                         View
-                      </a>
+                      </button>
                     </div>
                   </div>
                 ))}

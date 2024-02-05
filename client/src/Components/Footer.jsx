@@ -108,10 +108,10 @@ export default function Footer() {
             </div>
           </div>
       <div className="container text-center">
-            <h6> &copy; 2024 EZY MART</h6>
+            <h6 className="mt-3"> &copy; 2024 EZY MART</h6>
             <div className="footer-image ">
               <img className="m-3" src={insta} height={20} />
-              <img src={facebook} height={20} />
+              <img className="m-3" src={facebook} height={20} />
             </div>
           </div>
       </footer>

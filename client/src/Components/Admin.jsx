@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 // import ResetPassword from "./ResetPassword";
 import urls from "../../utils/url";
 import Profile from "./Profile";
+import ResetPassword from "./ResetPassword";
 export default function Admin() {
   const HOSTED_SERVER_URL=urls();
   const [selecteIcon, setSelecteIcon] = useState(null);
@@ -51,22 +52,23 @@ export default function Admin() {
   return (
     <>
       <div className="admin">
-        <div className="container who mt-4">
+        {/* <div className="container who mt-4">
           <div className="row">
             <div className="col-md-12 text-center">
               <h3 className="animate-charcter">AdminZen</h3>
             </div>
           </div>
-        </div>
+        </div> */}
 
-        <div className="top-right-div">
+        {/* <div className="top-right-div">
           <Link
             to="/admin/dashboard/icon"
             onClick={() => handleClick(<Icon />)}
           >
-            {/* <img src={profile} /> */}
           </Link>
-        </div>
+        </div> */}
+                    {/* <img src={profile} /> */}
+
         <div className="top-side">{selecteIcon}</div>
 
         <div className="ad-table">

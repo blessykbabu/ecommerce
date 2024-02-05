@@ -45,7 +45,9 @@ export default function Adress() {
               <textarea
                 className="form-control"
                 value={userData.address}
-                style={{ width: 300, margin: "0 auto",textAlign:"center" }}
+                cols={10}
+                rows={10}
+                style={{ width: 300, margin: "0 auto",textAlign:"center",backgroundColor:"beige" }}
               />
             </div>
 

@@ -8,7 +8,6 @@ const setAccessControl=(access_type)=>{
         accesscontrol(access_type,req,res,next)
     }
 }
-console.log("reched router");
 router.post('/login',setAccessControl('*'),authControle.login);
 router.post('/logout',setAccessControl('*'),authControle.logout);
 router.post('/forgot-password',setAccessControl('*'),authControle.forgotPasswordController);

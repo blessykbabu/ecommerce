@@ -307,6 +307,44 @@ async function userProfile(req,res){
     return res.status(404).send(response);
   }
 }
+
+
+
+async function user(req,res){
+ 
+  try {
+    console.log("reached user")
+    let user = req.params;
+    console.log("user:",user)
+    let userDetails = await users.findOne({ _id: user.id },{ password: 0 });
+    // console.log("userdetails:",userDetails)
+    if (userDetails) {
+      let response = successFunction({
+        statusCode: 200,
+        data: userDetails,
+        message: "user data Recieaved",
+      });
+      return res.status(200).send(response);
+    } else {
+      let response = errorFunction({
+        statusCode: 404,
+        message: "user not found",
+      });
+      return res.status(404).send(response);
+    }
+
+  } catch (error) {
+    console.log(error);
+
+    let response = errorFunction({
+      statusCode: 404,
+      message: "user not found",
+    });
+    return res.status(404).send(response);
+  }
+}
+
+
 async function fetchCart(req,res){
   try {
     console.log("reach fetch cart");
@@ -739,10 +777,53 @@ async function Seller_deleteProduct(req, res) {
     return res.status(500).send(response);
   }
 }
+
+
+async function role(req, res) {
+  try {
+    console.log("reached role");
+    let user = req.params;
+    console.log("user:", user);
+
+    // Find the user details
+    let userDetails = await users.findOne({ _id: user.id }, { password: 0 });
+
+    if (userDetails) {
+      // Update both category and userType
+      await users.updateOne({ _id: user.id }, { $set: { category: 'seller', usertype: '6598dd77f3261b14b25ff389' } });
+
+      // Fetch the updated user details
+      userDetails = await users.findOne({ _id: user.id }, { password: 0 });
+
+      let response = successFunction({
+        statusCode: 200,
+        data: userDetails,
+        message: "Category and userType updated",
+      });
+
+      return res.status(200).send(response);
+    } else {
+      let response = errorFunction({
+        statusCode: 404,
+        message: "User not found",
+      });
+      return res.status(404).send(response);
+    }
+  } catch (error) {
+    console.log(error);
+
+    let response = errorFunction({
+      statusCode: 500,
+      message: "Internal server error",
+    });
+    return res.status(500).send(response);
+  }
+}
 module.exports={
 newUser,
 newProduct,
 userProfile,
+user,
 Fetch_products,
 FetchOne_Product,
 addCart,
@@ -756,5 +837,6 @@ Product_management,
 CancelOrder,
 deleteUser,
 deleteProduct,
-Seller_deleteProduct
+Seller_deleteProduct,
+role
 }

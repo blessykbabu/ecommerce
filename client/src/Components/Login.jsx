@@ -8,7 +8,8 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate, Link } from "react-router-dom";
 import urls from "../../utils/url";
 import Success from "./Success";
-
+import { ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
   const HOSTED_SERVER_URL=urls();
@@ -42,7 +43,7 @@ export default function Login() {
         const token = response.data.data;
         localStorage.setItem("token", token);
         console.log("token:", token);
-
+        toast.success(response.data.message)
         if (response.data.usertype === "admin") {
           navigate("/admin/dashboard");
         } else if (response.data.usertype === "buyer") {
@@ -53,6 +54,7 @@ export default function Login() {
           console.error("Unknown user:", response.data.usertype);
         }
       }
+      location.reload();
       resetForm();
     } catch (error) {
       console.error("Not Submitted", error);
@@ -68,6 +70,7 @@ export default function Login() {
   return (
     <>
       <div className="lgfrm">
+      <ToastContainer position="top-right"  hideProgressBar={false} />
         <div className="mx-auto col-sm-12 col-md-12 col-lg-5 justify-content-center lg-container">
         {/* <div className="mx-auto col-sm-12 col-md-12 col-lg-7 justify-content-center lg-container"> */}
 

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
-import Loading from "./Loading";
-import SuccessComponent from "./SuccessComponent";
-import urls from "../../Urls/url";
+import urls from "../../utils/url";
+import Success from "./Success";
+import Loader from "./Loader";
 export default function AdViewUser() {
   const HOSTED_SERVER_URL=urls();
   const [lists, setLists] = useState([]);
@@ -84,7 +84,7 @@ export default function AdViewUser() {
     
     <div>
       {loading?
-      (<Loading/>):(
+      (<Loader/>):(
     
       
       
@@ -150,7 +150,7 @@ export default function AdViewUser() {
               }
        </div>    
        {deletedata && (
-        <SuccessComponent message={validationMessage} onClose={handledelete} />
+        <Success message={validationMessage} onClose={handledelete} />
       )}   
     </>
   );
