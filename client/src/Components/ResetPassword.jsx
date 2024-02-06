@@ -8,7 +8,8 @@ import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons from a p
 import axios from "axios";
 import { useNavigate,useLocation} from "react-router-dom";
 import urls from "../../utils/url";
-
+import { ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function ResetPassword() {
   const HOSTED_SERVER_URL=urls()
   const navigate = useNavigate();
@@ -48,7 +49,7 @@ export default function ResetPassword() {
  
       console.log("Reset password:", response.data);
        console.log("response",response)
-      // alert("your password is changed");
+      toast.success("your password is changed");
 
       if (response.data.error) {
         setbackendError(response.data.error);
@@ -80,6 +81,7 @@ export default function ResetPassword() {
   return (
     <>
       <div className="lgfrm">
+      <ToastContainer position="top-right" hideProgressBar={false} />
         {/* col-sm-12 col-md-12 col-lg-5 */}
         <div
           className="container mx-auto  justify-content-center mb-3"

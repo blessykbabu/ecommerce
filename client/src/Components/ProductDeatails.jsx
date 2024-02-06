@@ -116,7 +116,7 @@ export default function ProductDetails() {
           }
         );
         setCartData(response.data.data);
-        alert("product added to the cart");
+        toast.success("product added to the cart");
         console.log(response.data.data);
       } catch (error) {
         if (error.response && error.response.status === 404) {

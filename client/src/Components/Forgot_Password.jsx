@@ -7,7 +7,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { object, string } from "yup";
 import axios from "axios";
 import { useNavigate} from "react-router-dom";
-import urls from "../../Urls/url";
+import urls from "../../utils/url";
 import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 export default function Forgot_Password() {
@@ -47,7 +47,7 @@ console.log("response",response)
       } else if (response.data.success) {
         setServerSuccess(true);
         setvalidationMsg(response.data.message);
-        toast.success("your password is changed");
+        toast.success("The password reset link has been sent to the email");
         const token = response.data.data;
        console.log("token in forgot password:", token);
 

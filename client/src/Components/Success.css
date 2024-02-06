@@ -4,9 +4,9 @@
   
   #card {
     position:absolute;
-    top: 60vh;
+    top: 30vh;
     width: 320px;
-    left: 60%;
+    left: 40%;
     display: block;
     /* margin: auto; */
     text-align: center;

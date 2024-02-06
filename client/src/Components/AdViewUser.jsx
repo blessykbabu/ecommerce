@@ -91,7 +91,7 @@ export default function AdViewUser() {
       <div className="listTable">
         <h2 style={{ textAlign: "center", color: "gray" }}>Users</h2>
         <div className="container ">
-          <table className="table table-primary table-striped">
+          <table className="table table-dark table-striped">
             {/*  table header */}
             <thead>
               <tr>
@@ -117,7 +117,7 @@ export default function AdViewUser() {
                   <td>{list.usertype}</td>
                   <td>{list.phone}</td>
                   <td>
-                    <button className="btn btn-success"  onClick= {() => onDelete(list._id)}>
+                    <button className="btn btn-primary"  onClick= {() => onDelete(list._id)}>
                      Delete
                     
                     </button>

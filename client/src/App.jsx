@@ -21,6 +21,9 @@ import NewProduct from "./Components/NewProduct";
 import MyProducts from "./Components/MyProducts";
 import SRemoveProduct from "./Components/SRemoveProduct";
 import BecomeSeller from "./Components/BecomeSeller";
+import About from "./Components/About";
+import Contact from "./Components/Contact";
+import Forgot_Password from "./Components/Forgot_Password";
 
 function App() {
 
@@ -46,6 +49,9 @@ function App() {
 
 
         <Route path="/logout" element={<Logout/>}/>
+        <Route path="/forgot/password" element={<Forgot_Password/>}/>
+           <Route path="/reset/password" element={<ResetPassword/>}/>
+
 
         <Route path="/seller" element={<Seller/>}/>
         <Route path="/add/products" element={<NewProduct/>}/>
@@ -62,6 +68,8 @@ function App() {
         <Route path="/mycart/:id" element={<Cart/>}/>
         <Route path="/change/role/:id" element={<BecomeSeller/>}/>
 
+  <Route path="/about" element={<About/>}/>
+  <Route path="/contact" element={<Contact/>}/>
 
 
 

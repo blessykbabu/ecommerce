@@ -552,7 +552,7 @@ async function viewUser(req, res) {
     const pageSize = parseInt(req.query.pageSize) || count;
    
     let info = await users
-      .find(({ deleted: { $ne: true } }))
+      .find(({ deleted: { $ne: true }}))
       .sort({ _id: -1 })
       .skip(pageSize * (pageNumber - 1))
       .limit(pageSize);
