@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams,Link } from "react-router-dom";
 import urls from "../../utils/url";
-import { ToastContainer,toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import toast,{Toaster} from "react-hot-toast";
+
 export default function Cart() {
   const HOSTED_SERVER_URL=urls();
   const { id } = useParams("");
@@ -135,9 +135,11 @@ const Delete = async (id) =>{
       {/* <h3>My cart</h3> */}
       <div className="container">
       <h3 style={{textAlign:"center"}}>My cart</h3>
-      <ToastContainer position="top-right"  hideProgressBar={false} />
+      {/* <ToastContainer position="top-right"  hideProgressBar={false} /> */}
+      <Toaster/>
         <div className="row">
-        {empty && <div className="empty text-center m-4"><div className="inner-div">Your cart is empty</div></div>}
+        {empty && <div className="empty text-center m-4">
+          <div className="inner-div" style={{color:"red"}}>Your cart is empty</div></div>}
           {cartProducts.map((item) => (
             <div key={item._id} className="col-md-3 mb-3">
               <div className="card">

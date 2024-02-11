@@ -6,8 +6,9 @@ import Success from "./Success";
 import { useNavigate } from "react-router-dom";
 import StarRating from "./straRating";
 import arow from "../images/arow.png";
-import { ToastContainer,toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import { ToastContainer,toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+import toast,{Toaster} from "react-hot-toast";
 export default function ProductDetails() {
   const navigate = useNavigate();
   const HOSTED_SERVER_URL = urls();
@@ -118,6 +119,7 @@ export default function ProductDetails() {
         setCartData(response.data.data);
         toast.success("product added to the cart");
         console.log(response.data.data);
+        getDetails();
       } catch (error) {
         if (error.response && error.response.status === 404) {
           console.log("not added to cart");
@@ -157,6 +159,7 @@ export default function ProductDetails() {
         toast.success('Thank you so much for your order!');
         setOrderSuccess(true);
         console.log(response.data.data);
+        getDetails();
       } catch (error) {
         if (error.response && error.response.status === 404) {
           console.log("your order is failed");
@@ -192,7 +195,7 @@ export default function ProductDetails() {
   return (
     <>
       <div className="container pdata">
-      <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} />
+      <Toaster />
         <div className="card pd">
           <div className="card__title">
             <div className="icon">

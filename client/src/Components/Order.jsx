@@ -3,8 +3,8 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import "./style.css";
 import urls from "../../utils/url";
-import { ToastContainer,toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import toast,{Toaster} from "react-hot-toast";
+
 export default function Order() {
   const HOSTED_SERVER_URL=urls()
   const { id } = useParams("");
@@ -64,10 +64,11 @@ export default function Order() {
             Authorization: `Bearer ${token}`,
           },
         }
-      );
+      )
       toast.success("Order canceled");
-
       getOrder();
+
+
     } catch (error) {
       console.log("error:", error);
     }
@@ -119,11 +120,13 @@ export default function Order() {
       </div> */}
 
       <div className="container">
-      <ToastContainer position="top-right" hideProgressBar={false} />
+      {/* <ToastContainer position="top-right" hideProgressBar={false} /> */}
+      <Toaster />
+
         <h3 style={{ textAlign: "center", color: "gray" }}>My Orders</h3>
         {empty && (
           <div className="empty text-center m-4">
-            <div className="inner-div">You have not placed any orders yet</div>
+            <div className="inner-div" style={{color:"red"}}>You have not placed any orders yet</div>
           </div>
         )}
         <div className="row">

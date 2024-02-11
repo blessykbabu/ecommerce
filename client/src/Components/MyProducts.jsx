@@ -56,7 +56,7 @@ export default function MyProducts() {
       <h3 style={{textAlign:"center",color:"gray"}}>My Store</h3>
 
         <div className="row">
-        {empty && <div className="empty text-center m-4"><div className="inner-div">No products have been added yet</div></div>}
+        {empty && <div className="empty text-center m-4"><div className="inner-div" style={{color:"red"}}>No products have been added yet</div></div>}
           {Products.map((item) => (
             <div key={item._id} className="col-md-3 mb-3">
               <div className="card">

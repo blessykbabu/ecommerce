@@ -82,6 +82,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import urls from "../../utils/url";
 import "./style.css";
+import toast,{Toaster} from "react-hot-toast";
+
 
 export default function BecomeSeller() {
   const HOSTED_SERVER_URL = urls();
@@ -130,7 +132,10 @@ export default function BecomeSeller() {
           },
         }
       );
+      toast.success("Welcome to seller community")
       console.log(response);
+      location.reload();
+      getProfile();
     } catch (error) {
       if (error.response && error.response.status === 404) {
         console.log("User not found");
@@ -143,6 +148,7 @@ export default function BecomeSeller() {
   return (
     <>
       <div className="container">
+        <Toaster/>
         <div className="container">
           <p>Do you want to become a part of the seller community?</p>
           <button className="btn btn-primary" onClick={changeRole}>

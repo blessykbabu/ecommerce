@@ -10,6 +10,7 @@ import urls from "../../utils/url";
 import Success from "./Success";
 import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ErrorComponent from "./ErrorComponent";
 
 export default function Login() {
   const HOSTED_SERVER_URL=urls();
@@ -25,25 +26,73 @@ export default function Login() {
     password: "",
   };
 
+  // const handleSubmit = async (values, { setErrors, resetForm }) => {
+  //   try {
+  //     console.log("values::", values);
+  //     const response = await axios.post(`${HOSTED_SERVER_URL}/login`, values);
+  //     console.log("Login:", response.data);
+
+  //     if (response.data.error) {
+  //       setbackendError(response.data.error);
+  //       setErrors(response.data.error);
+  //       setvalidationMsg(response.data.message);
+  //       setServeError(true);
+  //       setServerSuccess(false);
+  //       toast.error(response.data.message)
+  //       navigate("/login")
+  //     } else if (response.data.success) {
+  //       setServerSuccess(true);
+  //       setvalidationMsg(response.data.message);
+  //       const token = response.data.data;
+  //       localStorage.setItem("token", token);
+  //       console.log("token:", token);
+  //       toast.success(response.data.message)
+  //       if (response.data.usertype === "admin") {
+  //         navigate("/admin/dashboard");
+  //       } else if (response.data.usertype === "buyer") {
+  //         navigate("/user");
+  //       } else if (response.data.usertype === "seller") {
+  //         navigate("/seller");
+  //       } else {
+  //         console.error("Unknown user:", response.data.usertype);
+  //         navigate("/login")
+  //       }
+  //     }
+  //     location.reload();
+  //     resetForm();
+
+  //   } catch (error) {
+  //     console.error("Not Submitted", error);
+  //     setServeError(true);
+  //     // console.log("response.data.errors::",response.data.errors);
+  //     console.log("error", error);
+  //   }
+  // };
+
+
   const handleSubmit = async (values, { setErrors, resetForm }) => {
     try {
       console.log("values::", values);
       const response = await axios.post(`${HOSTED_SERVER_URL}/login`, values);
       console.log("Login:", response.data);
-
+  
       if (response.data.error) {
         setbackendError(response.data.error);
         setErrors(response.data.error);
-        setvalidationMsg(response.data.message);
+        // setvalidationMsg(response.data.message); 
+        setvalidationMsg("Invalid username or password"); 
+
         setServeError(true);
         setServerSuccess(false);
+        toast.error(response.data.message);
+        navigate("/login");
       } else if (response.data.success) {
         setServerSuccess(true);
-        setvalidationMsg(response.data.message);
+        setvalidationMsg(response.data.message); 
         const token = response.data.data;
         localStorage.setItem("token", token);
         console.log("token:", token);
-        toast.success(response.data.message)
+        toast.success(response.data.message);
         if (response.data.usertype === "admin") {
           navigate("/admin/dashboard");
         } else if (response.data.usertype === "buyer") {
@@ -52,6 +101,7 @@ export default function Login() {
           navigate("/seller");
         } else {
           console.error("Unknown user:", response.data.usertype);
+          navigate("/login");
         }
       }
       location.reload();
@@ -61,8 +111,12 @@ export default function Login() {
       setServeError(true);
       // console.log("response.data.errors::",response.data.errors);
       console.log("error", error);
+      setvalidationMsg("Invalid  credentials"); 
     }
   };
+  
+  console.log("vm",validationMsg);
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -191,6 +245,7 @@ export default function Login() {
           </Formik>
         </div>
       </div>
+
       {serverSuccess && (
         <Success
           message={validationMsg}
@@ -199,7 +254,7 @@ export default function Login() {
         />
       )}
     {serverError && (
-        <Error
+        <ErrorComponent
           message={validationMsg}
           onClose={() => setServeError("")}
         />

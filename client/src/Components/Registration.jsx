@@ -4,10 +4,11 @@
 import React from "react";
 import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import {Link} from 'react-router-dom';
+import {Link, Navigate, useNavigate} from 'react-router-dom';
 import { object, string, number } from "yup";
 import axios from "axios";
 // import Loading from "./Loading";
+import Loader from "./Loader";
 import google from "../images/google.png";
 import facebook from "../images/facebook.png";
 import urls from "../../utils/url";
@@ -15,6 +16,7 @@ import ErrorComponent from "./ErrorComponent";
 import Success from "./Success";
 export default function Registration() {
   const HOSTED_SERVER_URL=urls()
+  const navigate=useNavigate();
   const [serverSuccess, setServerSuccess] = useState("");
   const [serverError, setServeError] = useState("");
   const [validationMsg, setvalidationMsg] = useState("");
@@ -46,7 +48,7 @@ export default function Registration() {
       if (response.data.error) {
         setbackendError(response.data.error);
         setErrors(response.data.error);
-        setvalidationMsg(response.data.message);
+        setvalidationMsg(response.data.messag);
         setServeError(true);
         setServerSuccess(false);
       } else if (response.data.success) {
@@ -54,6 +56,7 @@ export default function Registration() {
         setvalidationMsg(response.data.message);
       }
       resetForm();
+      navigate("/login")
     } catch (error) {
       console.error("Not Submitted", error);
       setServeError(true);
@@ -70,7 +73,7 @@ export default function Registration() {
     
       <div>
         {loading ? (
-          <Loading />
+          <Loader />
         ) : (
           <div>
             <h3 style={{ textAlign: "center", padding: 20, color: "gray",fontWeight:"bold" }}>
@@ -305,9 +308,12 @@ export default function Registration() {
                           >
                            {/* Address */}
                             <Field
-                            type="text"
+                            as="textarea"
+                            // type="textarea"
                             id="address"
                             name="address"
+                            rows={4}
+                            cols={23}
                             className="form-control"
                             placeholder=" Address"
                           />
@@ -356,7 +362,7 @@ export default function Registration() {
                           </label>
                          
                         </div>
-                        <p>Already have an Account? <Link to='/login' style={{textDecoration:"none"}}><span style={{color:"orange"}}> Login Now!</span></Link></p>
+                        <p style={{color:"green",fontWeight:"bolder"}}>Already have an Account? <Link to='/login' style={{textDecoration:"none"}}><span style={{color:"orange"}}> Login Now!</span></Link></p>
                         {/* <Link to='/login'> */}
                           <button className="btn btn-primary m-3" type="submit">
                           Create

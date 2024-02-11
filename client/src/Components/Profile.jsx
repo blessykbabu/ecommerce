@@ -38,7 +38,9 @@ export default function Profile() {
      <h3 style={{ color: "gray", fontSize: "20px", textAlign: "center",fontWeight:"bold"}} className="m-3 ms-4">
         My Profile
       </h3>
-      <div className="container col-sm-12 col-md-12 col-lg-3  ">
+      {/* <div className="container col-sm-12 col-md-12 col-lg-3  "> */}
+            <div className="container col-sm-12 col-md-12   ">
+
         <form className="shadow-lg bg-body rounded">
           <div className="container text-center pr">
             <div className="mb-3">

@@ -40,11 +40,13 @@ export default function Navbar() {
         setuserData(response.data.data);
         var type = response.data.data.category;
         console.log(type);
-        if (type == "seller") {
+        if (type == "Seller") {
           setSeller(true);
-        } else if (type == "Buyer") {
+        } 
+        else if (type == "Buyer") {
           setUser(true);
-        } else {
+        }
+         else {
           setSeller(false);
           setUser(false);
         }
@@ -133,7 +135,6 @@ export default function Navbar() {
                   <li className="nav-item dropdown">
                     <a
                       className="nav-link dropdown-toggle"
-                      href="#"
                       role="button"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
@@ -159,7 +160,6 @@ export default function Navbar() {
                   <li className="nav-item dropdown">
                     <a
                       className="nav-link dropdown-toggle"
-                      href="#"
                       role="button"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"

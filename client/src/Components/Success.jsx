@@ -1,6 +1,6 @@
 import "./Success.css"
 import {Link} from 'react-router-dom'
-const Success = ({ message }) => {
+const Success = ({ message,onClose }) => {
 
 return(
     <>
@@ -36,7 +36,7 @@ return(
       />
     </svg>
     <h3 id="status">{message}</h3>
-    < button id="contBtn"style={{border:0}}  >OK
+    < button id="contBtn"style={{border:0}} onClick={onClose}  >OK
     </button>
   </div>
   {/* <div id="lower-side">
