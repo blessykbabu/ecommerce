@@ -9,7 +9,7 @@ dotenv.config();
 const app = express();
 const bodyParser = require("body-parser");
 
-app.use(cors({orgin:'http://localhost:3000'}))
+// app.use(cors({orgin:'http://localhost:3000'}))
 app.use('/',express.static(__dirname + '/public'));
 
 app.use('/uploads',express.static(__dirname + '/uploads'));
