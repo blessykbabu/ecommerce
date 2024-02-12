@@ -287,7 +287,7 @@ import bn6 from "../images/bn6.webp";
 
 import icon1 from "../images/icon1.png";
 import "./style.css";
-export default function User() {
+export default function Seller() {
   const HOSTED_SERVER_URL=urls();
   const [userData, setuserData] = useState({});
 

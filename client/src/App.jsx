@@ -4,7 +4,6 @@ import Home from "./Components/Home";
 import Login from "./Components/Login";
 import Shop from "./Components/Shop";
 import Registration from "./Components/Registration";
-import Admin from "./Components/Admin";
 import { Logout } from "./Components/Logout";
 import Seller from "./Components/Seller";
 import ProductDetails from "./Components/ProductDeatails";
@@ -24,6 +23,7 @@ import BecomeSeller from "./Components/BecomeSeller";
 import About from "./Components/About";
 import Contact from "./Components/Contact";
 import Forgot_Password from "./Components/Forgot_Password";
+import Admin from "./Components/Admin";
 
 function App() {
 

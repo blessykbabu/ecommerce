@@ -93,6 +93,7 @@ export default function Login() {
         localStorage.setItem("token", token);
         console.log("token:", token);
         toast.success(response.data.message);
+        console.log("log",response.data.usertype);
         if (response.data.usertype === "admin") {
           navigate("/admin/dashboard");
         } else if (response.data.usertype === "buyer") {

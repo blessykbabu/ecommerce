@@ -3,7 +3,7 @@ const dotenv=require('dotenv');
 const conn=require('./db/config.js');
 const authRouter=require('./router/authRouter.js')
 const userRouter=require('./router/userRouter.js')
-const cors=require('cors');
+// const cors=require('cors');
 dotenv.config();
 
 const app = express();
